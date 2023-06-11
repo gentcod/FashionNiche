@@ -1,0 +1,43 @@
+{
+  "name": "irewoledeasooke",
+  "version": "1.0.0",
+  "description": "A fullstack web application for Irewolede Asooke (A fashion niche brand)",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "serve": "node dist/server.js",
+    "serve-dev": "nodemon dist/server.js",
+    "start": "npm run serve",
+    "start-dev": "npm run serve-dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gentcod/FashionNiche.git"
+  },
+  "keywords": [
+    "Fashion",
+    "Fullstack",
+    "Web-Application"
+  ],
+  "author": "Oyefule Oluwatayo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gentcod/FashionNiche/issues"
+  },
+  "homepage": "https://github.com/gentcod/FashionNiche#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^20.3.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "mongodb": "4.1",
+    "mongoose": "^7.2.3",
+    "nodemon": "^2.0.22"
+  }
+}
