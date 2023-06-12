@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose';
 
 export type ProductModel = {
    color: string;
@@ -23,19 +23,4 @@ export const productSchema = new mongoose.Schema<ProductModel>(
    }
 );
 
-export const Product = mongoose.model<ProductDocument>("Products", productSchema)
-
-// const newProduct = new Product({
-//    color: 'Wine and Coral',
-//    price: 15000,
-//    pictureUrl: 'www.google.com',
-//    quantityInStock: 5
-// })
-
-// newProduct.save()
-// .then((doc) => {
-//    console.log(`New document in collection was added: ${doc}`)
-// })
-// .catch(err => {
-//    console.error(err)
-// })
+export const Product = mongoose.model<ProductDocument>('Products', productSchema);

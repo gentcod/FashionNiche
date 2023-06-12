@@ -17,7 +17,7 @@ export const getOrders = async (req: Request, res: Response, next: NextFunction)
       res.status(400).json({
          status: 'failed',
          message: 'Invalid to fetch order data'
-      })
+      });
    }
    next();
-}
+};

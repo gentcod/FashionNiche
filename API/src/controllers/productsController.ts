@@ -17,20 +17,10 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
       res.status(400).json({
          status: 'failed',
          message: 'Invalid to fetch data'
-      })
+      });
    }
    next();
-}
-
-export const getOtherProducts = (req: Request, res: Response, next: NextFunction) => {
-   res.status(200).json({
-      status: 'success',
-      data: {
-         name: 'Oyefule Oluwatayo'
-      }
-   });
-   next();
-}
+};
 
 export const createProduct = async (req: Request, res: Response, next: NextFunction) => {
    try {
@@ -48,6 +38,7 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
       res.status(400).json({
          status: 'failed',
          message: 'Invalid data object initialized'
-      })
+      });
    }
-}
+   next();
+};

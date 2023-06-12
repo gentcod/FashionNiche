@@ -1,27 +1,33 @@
-import mongoose from "mongoose";
-import { OrderModel, orderSchema } from "./order";
+import mongoose, { PopulatedDoc } from 'mongoose';
+import { OrderModel } from './order';
+import { ObjectId } from 'mongodb';
 
 export type CustomerModel = {
-   name: string;
+   name: {
+      firstName: string;
+      lastName: string;
+   };
    phoneNumber: string;
    email?: string;
    address?: string;
-   orders: OrderModel[];
+   shippingAddress?: string;
+   orders: PopulatedDoc<OrderModel> | null;
 }
 
 export type CustomerDocument = mongoose.Document & CustomerModel;
 
 export const customerSchema = new mongoose.Schema<CustomerModel>({
-   name: {type: String, required: true},
-   phoneNumber: {type: String, required: true, unique: true},
-   email: {type: String, unique: false},
-   address: {type: String},
-   orders: {type: [orderSchema], required: true}
-}, 
-{
-   timestamps: true,
-   toJSON: {virtuals: true},
-   toObject: {virtuals: true}
-});
+   name: { type: String, required: true },
+   phoneNumber: { type: String, required: true, unique: true },
+   email: { type: String, unique: false },
+   address: { type: String },
+   shippingAddress: { type: String },
+   orders: { type: ObjectId, ref: 'Orders', required: true }
+},
+   {
+      timestamps: true,
+      toJSON: { virtuals: true },
+      toObject: { virtuals: true }
+   });
 
-export const Customer = mongoose.model<CustomerDocument>("Customer", customerSchema);
+export const Customer = mongoose.model<CustomerDocument>('Customers', customerSchema);
