@@ -2,3 +2,4 @@ node_modules
 dist
 ref.json
 config.dev.env
+config.prod.env
