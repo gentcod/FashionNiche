@@ -12,7 +12,7 @@ To work with the API, navigate into the API directory, you can run
 ###
 When in the API directory, run:
 ###
-`npm build` : compile the Typescript file into Javascript files, check the 'dist' directory or folder for the compiled code
+`npm run build` : compile the Typescript file into Javascript files, check the 'dist' directory or folder for the compiled code
 ###
 `npm run start-dev` : to start the application
 
