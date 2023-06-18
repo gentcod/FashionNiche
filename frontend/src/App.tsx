@@ -1,6 +1,8 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import axios from "axios";
+
+axios.get('http://localhost:5000/api/products').then(data => console.log(data))
 
 function App() {
   return (
