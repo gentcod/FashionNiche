@@ -1,5 +1,5 @@
-import {Request, Response, NextFunction} from 'express';
-import { Order } from '../model/order';
+import { Request, Response, NextFunction } from 'express';
+import { Order } from '../models/OrderModel';
 
 export const getOrders = async (req: Request, res: Response, next: NextFunction) => {
    try {
@@ -12,8 +12,7 @@ export const getOrders = async (req: Request, res: Response, next: NextFunction)
          }
       });
    }
-   catch (err)
-   {
+   catch (err) {
       res.status(400).json({
          status: 'failed',
          message: 'Invalid to fetch order data'

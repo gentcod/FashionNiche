@@ -1,5 +1,5 @@
-import {Request, Response, NextFunction} from 'express';
-import { Product } from '../model/product';
+import { Request, Response, NextFunction } from 'express';
+import { Product } from '../models/ProductModel';
 
 export const getProducts = async (req: Request, res: Response, next: NextFunction) => {
    try {
@@ -12,8 +12,7 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
          }
       });
    }
-   catch (err)
-   {
+   catch (err) {
       res.status(400).json({
          status: 'failed',
          message: 'Invalid to fetch data'
@@ -33,8 +32,7 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
          },
       });
    }
-   catch (err) 
-   {
+   catch (err) {
       res.status(400).json({
          status: 'failed',
          message: 'Invalid data object initialized'

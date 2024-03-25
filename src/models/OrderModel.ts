@@ -1,6 +1,6 @@
 import mongoose, { PopulatedDoc } from 'mongoose';
-import { CustomerModel } from './customer';
-import { ProductModel } from './product';
+import { CustomerModel } from './CustomerModel';
+import { ProductModel } from './ProductModel';
 import { ObjectId } from 'mongodb';
 
 export type OrderModel = {

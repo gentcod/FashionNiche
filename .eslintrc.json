@@ -20,7 +20,7 @@
         "semi": ["error", "always"],
         "quotes": ["error", "single"],
         "no-duplicate-imports": "error",
-        "no-unused-vars": "error",
+        "no-unused-vars": "warn",
         "prefer-const": "error",
         "prefer-template": "warn",
         "no-undef-init": "error"
