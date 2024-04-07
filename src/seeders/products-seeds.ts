@@ -6,6 +6,7 @@ mongoose.connect('mongodb://localhost:27017/fashion-niche').then(() => {
   execSeeding();
 });
 
+// INSERT DATA INTO DATABASE
 const seedData = async () => {
   try {
     await Product.bulkWrite([

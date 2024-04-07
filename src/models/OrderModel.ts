@@ -1,27 +1,41 @@
-import mongoose, { PopulatedDoc } from 'mongoose';
-import { CustomerModel } from './CustomerModel';
-import { ProductModel } from './ProductModel';
-import { ObjectId } from 'mongodb';
+import mongoose, { Document, Schema, Types } from 'mongoose';
 
-export type OrderModel = {
-   product: PopulatedDoc<ProductModel>;
-   customerId: PopulatedDoc<CustomerModel>
+export interface IOrder extends Document {
+   customerId: Types.ObjectId;
+   products: OrderProduct[];
    totalCost: number;
    amountPaid: number;
    ammountOwed?: number;
-   dateOfPurchase: Date
+   orderCompleted: boolean;
+   dateOfOrderCompletion: Date;
 }
 
-export type ProductDocument = mongoose.Document & OrderModel
+export type OrderProduct = {
+   productId: Types.ObjectId
+   quantityRequested: number;
+   quantityDelivered: number;
+   quantityOwed: number;
+}
 
-export const orderSchema = new mongoose.Schema<OrderModel>(
+export const orderSchema = new Schema<IOrder>(
    {
-      product: { type: ObjectId, ref: 'Products', required: true },
-      customerId: { type: ObjectId, ref: 'Customers', required: true },
-      totalCost: { type: Number, required: true, unique: true },
+      products: {
+         type: [
+            {
+               productId: { type: Schema.Types.ObjectId, ref: 'Products', required: true },
+               quantityRequested: { type: Number, required: true, },
+               quantityDelivered: { type: Number, required: true, },
+               quantityOwed: { type: Number, required: true, },
+            }
+         ],
+         required: true
+      },
+      customerId: { type: Schema.Types.ObjectId, ref: 'Customers', required: true },
+      totalCost: { type: Number, required: true, },
       amountPaid: { type: Number, required: true },
-      ammountOwed: { type: Number },
-      dateOfPurchase: { type: Date, default: Date.now(), required: true }
+      ammountOwed: { type: Number, required: true},
+      orderCompleted: { type: Boolean, required: true},
+      dateOfOrderCompletion: { type: Date, default: Date.now(), required: false }
    },
    {
       timestamps: true,
@@ -30,4 +44,4 @@ export const orderSchema = new mongoose.Schema<OrderModel>(
    }
 );
 
-export const Order = mongoose.model<ProductDocument>('Orders', orderSchema);
+export const OrderModel = mongoose.model<IOrder>('Orders', orderSchema, 'orders');

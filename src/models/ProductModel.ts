@@ -1,15 +1,13 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
-export type ProductModel = {
+export interface IProduct extends Document {
    color: string;
    price: number;
    pictureUrl: string;
    quantityInStock: number
 }
 
-export type ProductDocument = mongoose.Document & ProductModel
-
-export const productSchema = new mongoose.Schema<ProductModel>(
+export const productSchema = new mongoose.Schema<IProduct>(
    {
       color: { type: String, required: true },
       price: { type: Number, required: true },
@@ -23,4 +21,4 @@ export const productSchema = new mongoose.Schema<ProductModel>(
    }
 );
 
-export const Product = mongoose.model<ProductDocument>('Products', productSchema);
+export const ProductModel = mongoose.model<IProduct>('Products', productSchema, 'products');
