@@ -1,19 +1,22 @@
 {
-  "name": "irewoledeasooke",
+  "name": "fashion-niche",
   "version": "1.0.0",
-  "description": "A fullstack web application for Irewolede Asooke (A fashion niche brand)",
+  "description": "A backend application for a Fashniche (A fashion niche brand)",
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "serve": "npm run build && node dist/server.js",
     "serve-dev": "npm run build && nodemon dist/server.js",
+    "nodemon-dev": "nodemon src/server.ts",
     "start": "npm run serve",
     "start-dev": "npm run serve-dev",
+    "db-seeds": "npm run build && node ./dist/seeders/products-seeds.js --import",
     "update": "npm run check-updates && npm run updates-install",
     "check-updates": "npx npm-check-updates -u",
     "updates-install": "npm install",
-    "remove-updates": "rm -Rf node_modules"
+    "remove-updates": "rm -Rf node_modules",
+    "debug": "npm run build && ndb node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -38,7 +41,8 @@
     "@types/node": "^20.11.30",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
-    "eslint": "^8.57.0"
+    "eslint": "^8.57.0",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "cors": "^2.8.5",

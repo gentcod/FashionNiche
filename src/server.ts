@@ -6,7 +6,8 @@ dotenv.config({
   path: './config.dev.env'
 });
 
-const DB = process.env.MONGO_CLUSTER.replace('<password>', process.env.PASSWORD);
+// const DB = process.env.MONGO_CLUSTER.replace('<password>', process.env.PASSWORD);
+const DB:string = process.env.MONGO_LOCAL;
 
 mongoose.connect(DB).then(() => console.log('DB connection successful'))
 .catch(err => {

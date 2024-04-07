@@ -20,5 +20,4 @@ app.use(cors(corsOptions));
 app.use('/api', productsRouter);
 app.use('/api', ordersRouter);
 
-
 export default app;
