@@ -1,5 +1,11 @@
 import  mongoose from 'mongoose';
-import { Product } from '../models/ProductModel';
+import { ProductModel } from '../models/ProductModel';
+import readline from 'readline';
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: './config.dev.env'
+});
 
 mongoose.connect('mongodb://localhost:27017/fashion-niche').then(() => {
   console.log('Connected Successfully');
@@ -9,7 +15,7 @@ mongoose.connect('mongodb://localhost:27017/fashion-niche').then(() => {
 // INSERT DATA INTO DATABASE
 const seedData = async () => {
   try {
-    await Product.bulkWrite([
+    await ProductModel.bulkWrite([
       {
         insertOne: {
           document: {
@@ -42,7 +48,7 @@ const seedData = async () => {
       },
     ]);
 
-    await Product.insertMany([
+    await ProductModel.insertMany([
       {
         color: 'Blue',
         price: 250,
@@ -69,10 +75,28 @@ const seedData = async () => {
   process.exit();
 };
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Function to prompt for password
+const promptPassword = () => {
+  rl.question('Enter password to delete data: ', (password) => {
+    // Check if password matches
+    if (password !== process.env.SEEDERS_PASSWORD) {
+      console.log('Incorrect password. Data deletion aborted.');
+      process.exit();
+    }
+    console.log('Deleting seeded data------------------');
+    deleteData();
+  });
+};
+
 // DELETE ALL DATA FROM DB
 const deleteData = async () => {
   try {
-    await Product.deleteMany();
+    await ProductModel.deleteMany();
     console.log('Data successfully deleted!');
   } catch (err) {
     console.log(err);
@@ -86,6 +110,6 @@ const execSeeding = () => {
   if (process.argv[2] === '--import') {
     seedData();
   } else if (process.argv[2] === '--delete') {
-    deleteData();
+    promptPassword();
   }
 };
