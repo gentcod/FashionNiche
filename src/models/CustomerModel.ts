@@ -10,7 +10,7 @@ export interface ICustomer extends Document {
    orders?: Types.ObjectId[];
 }
 
-export interface IAddress extends Document {
+export interface IAddress {
    shippingAddress?: string;
    city: string;
    country: CustomerCountryEnum;

@@ -1,21 +1,14 @@
 import app from './app';
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
-dotenv.config({
-  path: './config.dev.env'
-});
+import { CONFIG } from './utils/config';
+import logger from './utils/logger';
 
-// const DB = process.env.MONGO_CLUSTER.replace('<password>', process.env.PASSWORD);
-const DB:string = process.env.MONGO_LOCAL;
-
-mongoose.connect(DB).then(() => console.log('DB connection successful'))
+mongoose.connect(CONFIG.DB).then(() => logger.info('DB connection successful'))
 .catch(err => {
-  throw new Error(err);
+  logger.log('error', err);
 });
 
-const port = process.env.PORT || 5050;
-
-app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
+app.listen(CONFIG.PORT, () => {
+  logger.info(`App running on port ${CONFIG.PORT}`);
 });

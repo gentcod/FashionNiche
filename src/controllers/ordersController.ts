@@ -1,22 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
-import { Order } from '../models/OrderModel';
+import { sendApiResponse, sendInternalErrorResponse } from '../utils/apiResponse';
+import { OrderServices } from '../services/orderServices';
 
 export const getOrders = async (req: Request, res: Response, next: NextFunction) => {
    try {
-      const orders = await Order.find();
+      const result = await new OrderServices().getOrders();
 
-      res.status(200).json({
-         status: 'success',
-         data: {
-            orders: orders
-         }
+      return sendApiResponse(res, {
+         status: result.status,
+         message: result.message,
+         data: result.data
       });
    }
    catch (err) {
-      res.status(400).json({
-         status: 'failed',
-         message: 'Invalid to fetch order data'
-      });
+      sendInternalErrorResponse(res, err);
+      next(err);
    }
-   next();
 };

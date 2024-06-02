@@ -1,42 +1,37 @@
 import { Request, Response, NextFunction } from 'express';
-import { Product } from '../models/ProductModel';
-
-export const getProducts = async (req: Request, res: Response, next: NextFunction) => {
-   try {
-      const products = await Product.find();
-
-      res.status(200).json({
-         status: 'success',
-         data: {
-            products: products
-         }
-      });
-   }
-   catch (err) {
-      res.status(400).json({
-         status: 'failed',
-         message: 'Invalid to fetch data'
-      });
-   }
-   next();
-};
+import { ProductServices } from '../services/productServices';
+import { sendApiResponse, sendInternalErrorResponse} from '../utils/apiResponse';
 
 export const createProduct = async (req: Request, res: Response, next: NextFunction) => {
    try {
-      const newProduct = await Product.create(req.body);
-
-      res.status(201).json({
-         status: 'success',
-         data: {
-            products: newProduct
-         },
+      console.log(req.body);
+      const result = await new ProductServices().createProduct(req.body);
+      return sendApiResponse(res, {
+         status: result.status,
+         message: result.message,
+         data: result.data
       });
    }
    catch (err) {
-      res.status(400).json({
-         status: 'failed',
-         message: 'Invalid data object initialized'
+      sendInternalErrorResponse(res, err);
+      next(err);
+   }
+};
+
+export const getProducts = async (req: Request, res: Response, next: NextFunction) => {
+   try {
+      console.log(req.body);
+      console.log(req.file);
+            
+      const result = await new ProductServices().getProducts();
+      return sendApiResponse(res, {
+         status: result.status,
+         message: result.message,
+         data: result.data
       });
    }
-   next();
+   catch (err) {
+      sendInternalErrorResponse(res, err);
+      next(err);
+   }
 };

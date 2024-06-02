@@ -1,14 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import productsRouter from './routes/productsRoute';
 import morgan from 'morgan';
-import ordersRouter from './routes/ordersRoute';
+import indexRouter from './routes';
+import { CONFIG } from './utils/config';
 
 const app = express();
 
 const corsOptions = {
-   origin: 'http://localhost:3000',
-   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+   origin: CONFIG.CLIENT_URL,
+   methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+   credentials: true,
+   optionsSuccessStatus: 200
 };
 
 if (process.env.NODE_ENV === 'development') {
@@ -16,8 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(cors(corsOptions));
-
-app.use('/api', productsRouter);
-app.use('/api', ordersRouter);
+app.use(express.json())
+app.use('', indexRouter);
 
 export default app;
