@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Initialize Nginx App
-      uses: actions/do-nginx-app@v1
+      uses: https://github.com/gentcod/do-nginx-app@v1
       with:
         ip-address: ${{ secrets.IP_ADDR }}
         env: ${{ secrets.ENV }}
